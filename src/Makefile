@@ -96,6 +96,7 @@ CLIENT_OBJS= \
 	shared/crypto.o \
 	shared/geom.o \
 	shared/glemu.o \
+    shared/jsmn.o \
 	shared/stream.o \
 	shared/tools.o \
 	shared/zip.o \
@@ -166,6 +167,7 @@ endif
 SERVER_OBJS= \
 	shared/crypto-standalone.o \
 	shared/geom-standalone.o \
+    shared/jsmn.o \
 	shared/stream-standalone.o \
 	shared/tools-standalone.o \
 	shared/zip-standalone.o \
@@ -296,6 +298,7 @@ engine/engine.h.gch: engine/version.h shared/cube.h.gch
 shared/crypto.o: shared/cube.h shared/tools.h shared/command.h shared/geom.h
 shared/crypto.o: shared/ents.h shared/glexts.h shared/glemu.h
 shared/crypto.o: shared/iengine.h shared/igame.h
+shared/jsmn.o: shared/jsmn.h
 shared/geom.o: shared/cube.h shared/tools.h shared/command.h shared/geom.h
 shared/geom.o: shared/ents.h shared/glexts.h shared/glemu.h shared/iengine.h
 shared/geom.o: shared/igame.h
