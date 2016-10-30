@@ -96,6 +96,7 @@ CLIENT_OBJS= \
 	shared/crypto.o \
 	shared/geom.o \
 	shared/glemu.o \
+	shared/ident.o \
 	shared/stream.o \
 	shared/tools.o \
 	shared/zip.o \
@@ -294,17 +295,19 @@ include wiki.mk
 engine/engine.h.gch: engine/version.h shared/cube.h.gch
 
 # DO NOT DELETE
+support/jsmn.o: support/jsmn.h
 
 shared/crypto.o: shared/cube.h shared/tools.h shared/command.h shared/geom.h
 shared/crypto.o: shared/ents.h shared/glexts.h shared/glemu.h
 shared/crypto.o: shared/iengine.h shared/igame.h
-shared/jsmn.o: shared/jsmn.h
+
 shared/geom.o: shared/cube.h shared/tools.h shared/command.h shared/geom.h
 shared/geom.o: shared/ents.h shared/glexts.h shared/glemu.h shared/iengine.h
 shared/geom.o: shared/igame.h
 shared/glemu.o: shared/cube.h shared/tools.h shared/command.h shared/geom.h
 shared/glemu.o: shared/ents.h shared/glexts.h shared/glemu.h shared/iengine.h
 shared/glemu.o: shared/igame.h
+shared/ident.o: shared/cube.h  shared/tools.h shared/command.h shared/iengine.h shared/igame.h
 shared/stream.o: shared/cube.h shared/tools.h shared/command.h shared/geom.h
 shared/stream.o: shared/ents.h shared/glexts.h shared/glemu.h
 shared/stream.o: shared/iengine.h shared/igame.h
@@ -331,13 +334,13 @@ engine/blob.o: engine/sound.h engine/world.h engine/octa.h engine/lightmap.h
 engine/blob.o: engine/bih.h engine/texture.h engine/model.h
 engine/client.o: engine/engine.h engine/version.h shared/cube.h shared/tools.h
 engine/client.o: shared/command.h shared/geom.h shared/ents.h shared/glexts.h
-engine/client.o: shared/glemu.h shared/iengine.h shared/igame.h engine/irc.h
+engine/client.o: shared/glemu.h shared/iengine.h shared/ident.h  shared/igame.h engine/irc.h
 engine/client.o: engine/sound.h engine/world.h engine/octa.h
 engine/client.o: engine/lightmap.h engine/bih.h engine/texture.h
 engine/client.o: engine/model.h
 engine/command.o: engine/engine.h engine/version.h shared/cube.h shared/tools.h
 engine/command.o: shared/command.h shared/geom.h shared/ents.h
-engine/command.o: shared/glexts.h shared/glemu.h shared/iengine.h
+engine/command.o: shared/glexts.h shared/glemu.h shared/ident.h  shared/iengine.h
 engine/command.o: shared/igame.h engine/irc.h engine/sound.h engine/world.h
 engine/command.o: engine/octa.h engine/lightmap.h engine/bih.h
 engine/command.o: engine/texture.h engine/model.h
@@ -550,7 +553,7 @@ game/ai.o: game/playerdef.h game/vars.h game/ai.h game/capture.h
 game/ai.o: game/defend.h game/bomber.h
 game/client.o: game/game.h engine/engine.h engine/version.h shared/cube.h
 game/client.o: shared/tools.h shared/command.h shared/geom.h shared/ents.h
-game/client.o: shared/glexts.h shared/glemu.h shared/iengine.h shared/igame.h
+game/client.o: shared/glexts.h shared/glemu.h shared/ident.h shared/iengine.h shared/igame.h
 game/client.o: engine/irc.h engine/sound.h engine/world.h engine/octa.h
 game/client.o: engine/lightmap.h engine/bih.h engine/texture.h engine/model.h
 game/client.o: game/gamemode.h game/weapons.h game/weapdef.h game/player.h

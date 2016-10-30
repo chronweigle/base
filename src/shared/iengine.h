@@ -483,7 +483,7 @@ struct serverinfo
     ENetAddress address;
 
     serverinfo(uint ip, int port, int priority = 0)
-     : numplayers(0), resolved(ip==ENET_HOST_ANY ? UNRESOLVED : RESOLVED), port(port), priority(priority)
+            : numplayers(0), resolved(ip==ENET_HOST_ANY ? UNRESOLVED : RESOLVED), port(port), priority(priority)
     {
         name[0] = map[0] = sdesc[0] = authhandle[0] = flags[0] = branch[0] = '\0';
         address.host = ip;
@@ -538,6 +538,40 @@ struct serverinfo
 };
 
 extern vector<serverinfo *> servers;
+
+
+// client
+struct identinfo
+{
+
+    string name;
+
+    identinfo(const char* _name)
+
+    {
+        size_t origLen = strlen(_name);
+        size_t slen = 511;
+        if(origLen < 511)
+        {
+            slen = origLen;
+        }
+
+        memcpy(&name, _name, slen);
+        name[slen] = 0;
+    }
+    ~identinfo() { cleanup(); }
+
+
+    void cleanup()
+    {
+    }
+
+
+};
+
+extern vector<identinfo *> useridents;
+
+
 
 extern void sendclientpacket(ENetPacket *packet, int chan);
 extern void flushclient();
