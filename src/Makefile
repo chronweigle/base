@@ -96,10 +96,10 @@ CLIENT_OBJS= \
 	shared/crypto.o \
 	shared/geom.o \
 	shared/glemu.o \
-    shared/jsmn.o \
 	shared/stream.o \
 	shared/tools.o \
 	shared/zip.o \
+    support/jsmn.o \
 	support/sqlite3.o \
 	engine/bih.o \
 	engine/blend.o \
@@ -167,10 +167,10 @@ endif
 SERVER_OBJS= \
 	shared/crypto-standalone.o \
 	shared/geom-standalone.o \
-    shared/jsmn.o \
 	shared/stream-standalone.o \
 	shared/tools-standalone.o \
 	shared/zip-standalone.o \
+    support/jsmn.o \
 	support/sqlite3.o \
 	engine/command-standalone.o \
 	engine/irc-standalone.o \
