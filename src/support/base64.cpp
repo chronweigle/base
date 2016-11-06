@@ -59,7 +59,7 @@ static inline int base64_length(unsigned int in_len)
  * @param in_len
  * @return
  */
-static inline int base64_decoded_length(char *encoded_string)
+static inline int base64_decoded_length(const char *encoded_string)
 {
     int in_len = strlen(encoded_string);
     int padding_chars = 0;
@@ -129,14 +129,14 @@ void base64_encode(char* dest, unsigned char const* bytes_to_encode, unsigned in
 
 }
 
-void base64_decode(char* dest,char *encoded_string) {
+void base64_decode(unsigned char* dest,const char *encoded_string) {
     int in_len = strlen(encoded_string);
     int i = 0;
     int j = 0;
     int in_ = 0;
     unsigned char char_array_4[4], char_array_3[3];
     int final_len = base64_decoded_length(encoded_string);
-    char ret[final_len];
+    unsigned char ret[final_len];
     int oi = 0;
 
     while (in_len-- && ( encoded_string[in_] != '=') && is_base64(encoded_string[in_])) {
@@ -176,6 +176,6 @@ void base64_decode(char* dest,char *encoded_string) {
             oi++;
         }
     }
-    ret[oi] = '\0';
-    strcpy(dest,ret);
+
+    memcpy(dest,ret,oi);
 }

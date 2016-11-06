@@ -2,6 +2,7 @@
 
 #include "engine.h"
 #include <signal.h>
+#include <shared/ident.h>
 
 string caption = "";
 
@@ -912,6 +913,10 @@ int main(int argc, char **argv)
         }
     }
     setlogfile("log.txt");
+
+    conoutf("loading user identities..");
+    loaduseridents();
+
     execfile("init.cfg", false);
     for(int i = 1; i<argc; i++)
     {

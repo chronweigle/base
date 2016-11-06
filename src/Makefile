@@ -309,6 +309,7 @@ shared/glemu.o: shared/cube.h shared/tools.h shared/command.h shared/geom.h
 shared/glemu.o: shared/ents.h shared/glexts.h shared/glemu.h shared/iengine.h
 shared/glemu.o: shared/igame.h
 shared/ident.o: shared/cube.h  shared/tools.h shared/command.h shared/iengine.h shared/igame.h support/base64.h
+shared/ident.o: support/jsmn.h
 shared/stream.o: shared/cube.h shared/tools.h shared/command.h shared/geom.h
 shared/stream.o: shared/ents.h shared/glexts.h shared/glemu.h
 shared/stream.o: shared/iengine.h shared/igame.h
@@ -386,7 +387,7 @@ engine/lightmap.o: engine/octa.h engine/lightmap.h engine/bih.h
 engine/lightmap.o: engine/texture.h engine/model.h
 engine/main.o: engine/engine.h engine/version.h shared/cube.h shared/tools.h
 engine/main.o: shared/command.h shared/geom.h shared/ents.h shared/glexts.h
-engine/main.o: shared/glemu.h shared/iengine.h shared/igame.h engine/irc.h
+engine/main.o: shared/glemu.h shared/iengine.h shared/ident.h shared/igame.h engine/irc.h
 engine/main.o: engine/sound.h engine/world.h engine/octa.h engine/lightmap.h
 engine/main.o: engine/bih.h engine/texture.h engine/model.h
 engine/master.o: engine/engine.h engine/version.h shared/cube.h shared/tools.h
