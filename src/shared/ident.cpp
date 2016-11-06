@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sodium.h>
 
+
 vector<identinfo *> useridents;
 int has_sodium_init = 0;
 void check_sodium_init()
@@ -71,16 +72,38 @@ VARF(IDF_PERSIST, curuserident, -1, -1,5000 ,switchuserident());
 ICOMMAND(0, getuserident, "bbb", (int *ident, int *prop, int *idx, int *numargs), getidents(*ident, *prop, *idx));
 
 
-
+/**
+ * called by adduserident, creates a new identity file
+ * @param name
+ * @return
+ */
 static identinfo *newuserident(const char *name)
 {
     check_sodium_init();
-    if(strlen(name) < 1)
+    if(strlen(name) < 1
+       || strlen(name) > 128
+       || strspn(name,"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_") != strlen(name))
+    {
+        conoutf("Identity name is invalid. It must be between 1 and 128 characters and can only contain letters, numbers, underscores and dashes.");
         return NULL;
+    }
+
+    string fname;
+
+    sprintf(fname, "idents/%s.txt",name);
+
     identinfo *ident = new identinfo(name);
 
+    crypto_sign_keypair(ident->pk, ident->sk);
 
+
+    conoutf("Attempting to open file '%s'", fname);
+    stream *f = openfile(fname, "w");
+    if(!f) return NULL;
+    f->printf("// TESTING\n");
+    delete f;
     useridents.add(ident);
+
     return ident;
 }
 

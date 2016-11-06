@@ -1,5 +1,5 @@
 // the interface the game uses to access the engine
-
+#include <sodium.h>
 extern int verbose, curtime, lastmillis, totalmillis, timescale, paused;
 extern uint totalsecs;
 extern time_t clocktime, currenttime, clockoffset;
@@ -545,7 +545,8 @@ struct identinfo
 {
 
     string name;
-
+    unsigned char pk[crypto_sign_PUBLICKEYBYTES];
+    unsigned char sk[crypto_sign_SECRETKEYBYTES];
     identinfo(const char* _name)
 
     {
