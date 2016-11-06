@@ -1,7 +1,5 @@
 #include "ident.h"
-#include "cube.h"
-#include <string.h>
-#include <sodium.h>
+
 
 
 vector<identinfo *> useridents;
@@ -90,7 +88,7 @@ static identinfo *newuserident(const char *name)
 
     string fname;
 
-    sprintf(fname, "idents/%s.txt",name);
+    sprintf(fname, "idents/%s.json",name);
 
     identinfo *ident = new identinfo(name);
 
@@ -100,7 +98,14 @@ static identinfo *newuserident(const char *name)
     conoutf("Attempting to open file '%s'", fname);
     stream *f = openfile(fname, "w");
     if(!f) return NULL;
-    f->printf("// TESTING\n");
+    string buf;
+
+    f->printf("{\n\"name\":\"%s\",\n",ident->name);
+    base64_encode(buf,ident->sk,crypto_sign_PUBLICKEYBYTES);
+    f->printf("\"secret_key\":\"%s\",\n",buf);
+    buf[0] = '\0';
+    base64_encode(buf,ident->pk,crypto_sign_SECRETKEYBYTES);
+    f->printf("\"public_key\":\"%s\"\n}",buf);
     delete f;
     useridents.add(ident);
 

@@ -102,6 +102,7 @@ CLIENT_OBJS= \
 	shared/zip.o \
     support/jsmn.o \
 	support/sqlite3.o \
+	support/base64.o \
 	engine/bih.o \
 	engine/blend.o \
 	engine/blob.o \
@@ -307,7 +308,7 @@ shared/geom.o: shared/igame.h
 shared/glemu.o: shared/cube.h shared/tools.h shared/command.h shared/geom.h
 shared/glemu.o: shared/ents.h shared/glexts.h shared/glemu.h shared/iengine.h
 shared/glemu.o: shared/igame.h
-shared/ident.o: shared/cube.h  shared/tools.h shared/command.h shared/iengine.h shared/igame.h
+shared/ident.o: shared/cube.h  shared/tools.h shared/command.h shared/iengine.h shared/igame.h support/base64.h
 shared/stream.o: shared/cube.h shared/tools.h shared/command.h shared/geom.h
 shared/stream.o: shared/ents.h shared/glexts.h shared/glemu.h
 shared/stream.o: shared/iengine.h shared/igame.h
