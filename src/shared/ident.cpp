@@ -101,10 +101,10 @@ static identinfo *newuserident(const char *name)
     string buf;
 
     f->printf("{\n\"name\":\"%s\",\n",ident->name);
-    base64_encode(buf,ident->sk,crypto_sign_PUBLICKEYBYTES);
+    base64_encode(buf,ident->sk,crypto_sign_SECRETKEYBYTES);
     f->printf("\"secret_key\":\"%s\",\n",buf);
     buf[0] = '\0';
-    base64_encode(buf,ident->pk,crypto_sign_SECRETKEYBYTES);
+    base64_encode(buf,ident->pk,crypto_sign_PUBLICKEYBYTES);
     f->printf("\"public_key\":\"%s\"\n}",buf);
     delete f;
     useridents.add(ident);
