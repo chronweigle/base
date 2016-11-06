@@ -40,7 +40,7 @@ CC_TEMP:=$(CC)
 override CXX=$(TOOLSET_PREFIX)$(CXX_TEMP)
 override CC=$(TOOLSET_PREFIX)$(CC_TEMP)
 
-INCLUDES= -I. -Ishared -Iengine -Igame -Ienet/include -Isupport
+INCLUDES= -I. -Ishared -Iengine -Igame -Ienet/include -Isupport -I/home/charlie/libz/libsodium1/include
 
 STRIP=
 ifeq (,$(findstring -g,$(CXXFLAGS)))
@@ -83,7 +83,7 @@ BIN_SUFFIX=_native
 endif
 endif
 CLIENT_INCLUDES= $(INCLUDES) -I/usr/X11R6/include `sdl2-config --cflags`
-CLIENT_LIBS= -Lenet -lenet -L/usr/X11R6/lib -lX11 `sdl2-config --libs` -lSDL2_image -lSDL2_mixer -lz -lGL
+CLIENT_LIBS= -Lenet -lenet -L/usr/X11R6/lib -lX11 `sdl2-config --libs` -lSDL2_image -lSDL2_mixer -lz -lGL -L/home/charlie/libz/libsodium1/lib -lsodium
 endif
 ifneq (,$(findstring linux,$(PLATFORM)))
 CLIENT_LIBS+= -lrt

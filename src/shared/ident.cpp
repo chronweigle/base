@@ -1,11 +1,37 @@
 #include "ident.h"
 #include "cube.h"
 #include <string.h>
+#include <sodium.h>
 
 vector<identinfo *> useridents;
+int has_sodium_init = 0;
+void check_sodium_init()
+{
+    if(has_sodium_init == 0)
+    {
+        int result = sodium_init();
+        if(result == 1)
+        {
+            conoutf("Sodium Already Init. Should not be seeing this.");
+        } else if(result == -1) {
+            conoutf("Error starting sodium");
+        } else if(result == 0) {
+            conoutf("Started sodium Successfully");
+            has_sodium_init = 1;
+        } else {
+
+           conoutf("Unknown Sodium Status: %d. Should not be seeing this. (may be impossible actually)",result);
+
+
+        }
+    }
+
+}
+
 
 void getidents(int ident, int prop, int idx)
 {
+
     if(ident < 0)
         intret(useridents.length());
     else {
@@ -29,6 +55,7 @@ void getidents(int ident, int prop, int idx)
 }
 
 void switchuserident(){
+
     if(curuserident >= useridents.length())
     {
         conoutf("That Identity doesn't exist");
@@ -47,6 +74,7 @@ ICOMMAND(0, getuserident, "bbb", (int *ident, int *prop, int *idx, int *numargs)
 
 static identinfo *newuserident(const char *name)
 {
+    check_sodium_init();
     if(strlen(name) < 1)
         return NULL;
     identinfo *ident = new identinfo(name);
