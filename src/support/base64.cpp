@@ -50,7 +50,7 @@ static inline char index_of(unsigned char c) {
  * @param in_len
  * @return
  */
-static inline int base64_length(unsigned int in_len)
+int base64_length(unsigned int in_len)
 {
     return 4 * (in_len % 3 + in_len) / 3;
 }

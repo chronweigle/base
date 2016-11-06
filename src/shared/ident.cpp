@@ -235,3 +235,41 @@ void loaduseridents(){
 }
 
 ICOMMAND(0, loaduseridents, "", (void), loaduseridents());
+
+
+
+long long signmessage(unsigned char* dest, const char* message)
+{
+    if(curuserident == -1)
+        return -1;
+    //
+    unsigned long long siglength;
+    int msglen = strlen(message);
+    unsigned char msgcast[msglen];
+    memcpy(msgcast,message,msglen);
+    crypto_sign_detached(dest, &siglength, msgcast, msglen, useridents[curuserident]->sk);
+    return siglength;
+}
+
+
+void signmessagestr(const char* message)
+{
+    unsigned char sig[crypto_sign_BYTES];
+    long long size = signmessage(sig, message);
+    if(size == -1){
+        conoutf("error signing message");
+    }
+
+
+    if(base64_length(size) > 511)
+    {
+        conoutf("signature too big to display");
+    }
+    char *buf = newstring((size_t)511);
+    base64_encode(buf,sig,size);
+    stringret(buf);
+
+}
+
+ICOMMAND(0, signmessage, "s", (const char *message), signmessagestr(message));
+
