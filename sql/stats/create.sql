@@ -39,7 +39,8 @@ CREATE TABLE game_players (
     frags INTEGER,
     deaths INTEGER,
     wid INTEGER,
-    timeactive INTEGER
+    timeactive INTEGER,
+    public_key TEXT DEFAULT NULL
 );
 
 CREATE TABLE game_weapons (

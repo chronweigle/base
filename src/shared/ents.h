@@ -2,8 +2,9 @@
 // the gamecode extends these types to add game specific functionality
 
 // ET_*: the only static entity types dictated by the engine... rest are gamecode dependent
+#include <shared/zone.h>
 
-enum { ET_EMPTY=0, ET_LIGHT, ET_MAPMODEL, ET_PLAYERSTART, ET_ENVMAP, ET_PARTICLES, ET_SOUND, ET_LIGHTFX, ET_SUNLIGHT, ET_GAMESPECIFIC };
+enum { ET_EMPTY=0, ET_LIGHT, ET_MAPMODEL, ET_PLAYERSTART, ET_ENVMAP, ET_PARTICLES, ET_SOUND, ET_LIGHTFX, ET_SUNLIGHT, ET_ZONE, ET_GAMESPECIFIC };
 enum { LFX_SPOTLIGHT = 0, LFX_DYNLIGHT, LFX_FLICKER, LFX_PULSE, LFX_GLOW, LFX_MAX };
 enum { LFX_S_NONE = 0, LFX_S_RAND1 = 1<<0, LFX_S_RAND2 = 1<<1, LFX_S_MAX = 2 };
 

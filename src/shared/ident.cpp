@@ -132,28 +132,27 @@ void adduserident(const char *name)
         conoutf("added identity %s", name);
 }
 ICOMMAND(0, adduserident, "s", (char *n), adduserident(n));
-static int jsoneq(const char *json, jsmntok_t *tok, const char *s) {
-    if (tok->type == JSMN_STRING && (int) strlen(s) == tok->end - tok->start &&
-        strncmp(json + tok->start, s, tok->end - tok->start) == 0) {
-        return 0;
-    }
-    return -1;
-}
+
 void loaduserident(const char *name)
 {
+    //check that an identity with this name doesn't already exist
     loopv(useridents) if(!strcmp(useridents[i]->name, name)) return;
 
+    //create a new identity
     identinfo *ident = new identinfo(name);
+
+    //open the idenity file
     string fname;
-
     sprintf(fname, "idents/%s.json",name);
-
     stream *f = openfile(fname, "r");
+
+    //read the file
     char buf[f->size()];
     size_t siz  =f->size();
     f->read(buf,siz);
 
 
+    //allocate the json parser
     jsmn_parser parser;
 
     //tokens

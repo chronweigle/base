@@ -1,7 +1,7 @@
 // worldio.cpp: loading & saving of maps
 
 #include "engine.h"
-
+#include <support/json.h>
 extern const namemap mapexts[] = {
     { ".mpz", MAP_MAPZ },
     { ".ogz", MAP_OCTA },
@@ -1934,3 +1934,9 @@ int getmapversion() { return hdr.version; }
 ICOMMAND(0, mapversion, "", (void), intret(getmapversion()));
 int getmaprevision() { return hdr.revision; }
 ICOMMAND(0, maprevision, "", (void), intret(getmaprevision()));
+
+
+bool loadworldjson(const char *mname) {
+    int loadingstart = SDL_GetTicks();
+
+}
